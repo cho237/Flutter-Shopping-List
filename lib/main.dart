@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/widgets/grocery_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,22 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Your groceries"),
-        ),
-        body: Column(children: [
-          ListTile(
-            leading: Container(
-              height: 20,
-              width: 20,
-              color: Colors.red,
-            ),
-            title: const Text("Milk"),
-            trailing: const Text("1"),
-          )
-        ]),
-      ),
+      home: const GroceryList(),
     );
   }
 }
