@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:meals/widgets/new_item.dart';
+import 'package:http/http.dart' as http;
 
 import '../models/grocery_item.dart';
 
@@ -13,20 +16,28 @@ class GroceryList extends StatefulWidget {
 class _GroceryListState extends State<GroceryList> {
   final List<GroceryItem> _groceryItems = [];
 
+  @override
+  void initState() {
+    _loadItems();
+    super.initState();
+  }
+
+  void _loadItems() async {
+    final url = Uri.http('10.0.2.2:5000', 'shopping');
+    final response = await http.get(url);
+    final Map<String, dynamic> listData = json.decode(response.body);
+    final 
+    for(final item in listData)
+
+  }
+
   void _addItem() async {
-    final newItem = await Navigator.of(context).push<GroceryItem>(
+    await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
         builder: (context) => const NewItem(),
       ),
     );
-
-    if (newItem == null) {
-      return;
-    } else {
-      setState(() {
-        _groceryItems.add(newItem);
-      });
-    }
+    _loadItems();
   }
 
   void _removeItem(GroceryItem item) {
